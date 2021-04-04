@@ -307,7 +307,7 @@ class UtilsLibrary {
 		return intent;
 	}
 
-	static void goToUpdate(final Context context, UpdateFrom updateFrom, URL url) {
+	static void goToUpdate(final Context context, UpdateFrom updateFrom, URL url,Boolean isCancellable) {
 		Intent intent = intentToUpdate(context, updateFrom, url);
 
 		if (updateFrom.equals(UpdateFrom.GOOGLE_PLAY)) {
@@ -323,6 +323,7 @@ class UtilsLibrary {
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			builder.setView(R.layout.download_progress_dialog);
+			builder.setCancelable(isCancellable);
 			final AlertDialog dialog = builder.create();
 
 			dialog.show();

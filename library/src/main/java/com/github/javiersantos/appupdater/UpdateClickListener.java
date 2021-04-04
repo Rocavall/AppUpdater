@@ -16,15 +16,17 @@ public class UpdateClickListener implements DialogInterface.OnClickListener {
     private final Context context;
     private final UpdateFrom updateFrom;
     private final URL apk;
+    private final Boolean isCancellable;
 
-    public UpdateClickListener(final Context context, final UpdateFrom updateFrom, final URL apk) {
+    public UpdateClickListener(final Context context, final UpdateFrom updateFrom, final URL apk, Boolean isCancellable) {
         this.context = context;
         this.updateFrom = updateFrom;
         this.apk = apk;
+        this.isCancellable = isCancellable;
     }
 
     @Override
     public void onClick(final DialogInterface dialog, final int which) {
-        UtilsLibrary.goToUpdate(context, updateFrom, apk);
+        UtilsLibrary.goToUpdate(context, updateFrom, apk, isCancellable);
     }
 }
