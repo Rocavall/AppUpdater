@@ -38,7 +38,7 @@ class UtilsDisplay {
                 .create();
     }
 
-    static Snackbar showUpdateAvailableSnackbar(final Context context, String content, Boolean indefinite, final UpdateFrom updateFrom, final URL apk) {
+    static Snackbar showUpdateAvailableSnackbar(final Context context, String content, Boolean indefinite, final UpdateFrom updateFrom, final URL apk,final Boolean isCancellable) {
         Activity activity = (Activity) context;
         int snackbarTime = indefinite ? Snackbar.LENGTH_INDEFINITE : Snackbar.LENGTH_LONG;
 
@@ -52,7 +52,7 @@ class UtilsDisplay {
         snackbar.setAction(context.getResources().getString(R.string.appupdater_btn_update), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UtilsLibrary.goToUpdate(context, updateFrom, apk);
+                UtilsLibrary.goToUpdate(context, updateFrom, apk, isCancellable);
             }
         });
         return snackbar;
