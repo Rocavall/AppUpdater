@@ -3,13 +3,13 @@ package com.github.javiersantos.appupdater;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
+import android.util.Log;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AlertDialog;
-import android.text.TextUtils;
-import android.util.Log;
 
 import com.downloader.PRDownloader;
 import com.github.javiersantos.appupdater.enums.AppUpdaterError;
@@ -19,6 +19,7 @@ import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.github.javiersantos.appupdater.interfaces.IAppUpdater;
 import com.github.javiersantos.appupdater.objects.GitHub;
 import com.github.javiersantos.appupdater.objects.Update;
+import com.google.android.material.snackbar.Snackbar;
 
 public class AppUpdater implements IAppUpdater {
     private Context context;
@@ -39,6 +40,8 @@ public class AppUpdater implements IAppUpdater {
     private AlertDialog alertDialog;
     private Snackbar snackbar;
     private Boolean isDialogCancelable;
+
+    private int currentVersionCode = 0;
 
     public AppUpdater(Context context) {
         this.context = context;
@@ -160,6 +163,11 @@ public class AppUpdater implements IAppUpdater {
     @Override
     public AppUpdater setContentOnUpdateAvailable(@StringRes int textResource) {
         this.descriptionUpdate = context.getString(textResource);
+        return this;
+    }
+
+    public AppUpdater setCurrentVersionCode(int currentVersionCode) {
+        this.currentVersionCode = currentVersionCode;
         return this;
     }
 
@@ -338,7 +346,7 @@ public class AppUpdater implements IAppUpdater {
                     return;
                 }
 
-                Update installedUpdate = new Update(UtilsLibrary.getAppInstalledVersion(context), UtilsLibrary.getAppInstalledVersionCode(context));
+                Update installedUpdate = new Update(UtilsLibrary.getAppInstalledVersion(context), UtilsLibrary.getAppInstalledVersionCode(context, currentVersionCode));
                 if (UtilsLibrary.isUpdateAvailable(installedUpdate, update)) {
                     Integer successfulChecks = libraryPreferences.getSuccessfulChecks();
                     if (UtilsLibrary.isAbleToShow(successfulChecks, showEvery)) {

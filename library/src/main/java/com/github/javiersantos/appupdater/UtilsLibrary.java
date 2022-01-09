@@ -69,8 +69,8 @@ class UtilsLibrary {
 		return version;
 	}
 
-	static Integer getAppInstalledVersionCode(Context context) {
-		Integer versionCode = 0;
+	static Integer getAppInstalledVersionCode(Context context, int currentVersionCode) {
+		int versionCode = currentVersionCode;
 
 		try {
 			versionCode = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
