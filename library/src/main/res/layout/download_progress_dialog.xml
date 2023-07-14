@@ -17,7 +17,6 @@
         android:text="@string/downloading_update_dialog"
         android:textAppearance="?android:textAppearanceSmall"
         android:layout_gravity="center_vertical"
-        android:id="@+id/loading_msg"
         android:layout_toEndOf="@+id/loader"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/loader" />
