@@ -1,11 +1,13 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdkVersion 27
+    namespace 'com.github.javiersantos.appupdater'
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 31
     }
 
     buildTypes {
@@ -27,4 +29,5 @@ dependencies {
     api 'com.squareup.okhttp3:okhttp:3.10.0'
     api 'org.jsoup:jsoup:1.11.3'
     api 'com.mindorks.android:prdownloader:0.6.0'
+    implementation 'androidx.core:core-ktx:+'
 }
